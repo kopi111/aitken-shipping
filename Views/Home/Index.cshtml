@@ -1,0 +1,87 @@
+@{
+    ViewData["Title"] = "Dispatch for island-wide delivery";
+    var tracked = ViewData["ShipmentsTracked"];
+}
+
+<section class="hero">
+    <div class="container hero-grid">
+        <div>
+            <span class="waybill green"><span class="led"></span> Live dispatch · 14 parishes</span>
+            <h1>Put your parcel<br />on the <span>board.</span></h1>
+            <p class="lead">Aitken Shipping runs like an operations desk. Quote it, book it, and watch every scan from pickup to doorstep — across the whole island.</p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" asp-controller="Quote" asp-action="Index">Get an instant quote</a>
+                <a class="btn btn-ghost" asp-controller="Book" asp-action="Index">Book a shipment</a>
+            </div>
+        </div>
+
+        <div class="console">
+            <div class="console-head">
+                <span>WB · TRACK CONSOLE</span>
+                <span class="dots"><i class="on"></i><i class="on"></i><i></i></span>
+            </div>
+            <div class="console-body">
+                <div class="map-wrap">
+                    <svg class="jm-map" viewBox="0 0 400 210" role="img" aria-label="Route across Jamaica from Kingston to Montego Bay">
+                        <path class="coast" d="M 26 118 C 34 96, 70 90, 108 92 C 150 94, 178 76, 220 78 C 268 80, 316 86, 362 100 C 382 107, 386 120, 372 132 C 348 152, 300 150, 250 149 C 198 148, 150 158, 100 151 C 58 145, 18 140, 26 118 Z" />
+                        <path class="route-base" d="M 300 136 C 250 150, 200 120, 150 118 C 130 116, 112 110, 100 104" />
+                        <path class="route" d="M 300 136 C 250 150, 200 120, 150 118 C 130 116, 112 110, 100 104" />
+                        <circle class="node pulse" cx="300" cy="136" r="4" />
+                        <circle class="node" cx="300" cy="136" r="4.5" />
+                        <circle class="node" cx="100" cy="104" r="4.5" />
+                        <text class="city" x="284" y="152">KINGSTON</text>
+                        <text class="city" x="72" y="98">MO BAY</text>
+                    </svg>
+                    <div class="map-coords"><span>ORIG · KINGSTON</span><span>ETA 07:40</span><span>DEST · ST JAMES</span></div>
+                </div>
+                <form asp-controller="Track" asp-action="Index" method="get" class="field mt-1">
+                    <label for="tn">Tracking number</label>
+                    <div style="display:flex; gap:0.5rem;">
+                        <input type="text" id="tn" name="trackingNumber" placeholder="AS240001JM" autocomplete="off" style="flex:1;" />
+                        <button class="btn btn-green" type="submit">Track</button>
+                    </div>
+                    <span class="help">DEMO · AS240001JM · AS240002JM · AS240003JM</span>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="stats reveal">
+        <div class="stat"><div class="k">Parishes served</div><div class="num"><em>14</em></div></div>
+        <div class="stat"><div class="k">Parcels on the board</div><div class="num">@tracked</div></div>
+        <div class="stat"><div class="k">Fastest lane</div><div class="num">Overnight</div></div>
+        <div class="stat"><div class="k">Tracked door to door</div><div class="num"><em>100%</em></div></div>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="waybill">What we move</span>
+            <h2>One desk, every kind of delivery</h2>
+            <p>From a single waybill to a pallet of stock, pick the lane that fits — we run the rest.</p>
+        </div>
+        <div class="card-grid">
+            <div class="card reveal"><div class="tag">DOCS · SMALL</div><h3>Documents & parcels</h3><p>Same-island delivery for the things that can't wait — contracts, keys, spare parts.</p></div>
+            <div class="card reveal"><div class="tag">E-COMMERCE</div><h3>Fulfilment</h3><p>Bulk pickup, branded tracking, and cash-on-delivery for online sellers.</p></div>
+            <div class="card reveal"><div class="tag">FREIGHT</div><h3>Pallets & freight</h3><p>Heavier loads across the island with dimensional pricing that stays fair.</p></div>
+        </div>
+        <div class="mt-2"><a class="btn btn-ghost" asp-controller="Home" asp-action="Services">See all lanes & rates</a></div>
+    </div>
+</section>
+
+<section class="section alt">
+    <div class="container">
+        <div class="section-head center reveal">
+            <span class="waybill green">How it runs</span>
+            <h2>Three moves, no surprises</h2>
+        </div>
+        <div class="steps">
+            <div class="step reveal"><div class="n">Quote</div><h3>Price it upfront</h3><p>Tell us the route and the weight. See an itemised manifest before you commit.</p></div>
+            <div class="step reveal"><div class="n">Book</div><h3>Get a waybill</h3><p>Confirm the booking and your tracking number is issued on the spot.</p></div>
+            <div class="step reveal"><div class="n">Track</div><h3>Watch it move</h3><p>Follow every scan from pickup to delivery, live on the board.</p></div>
+        </div>
+    </div>
+</section>

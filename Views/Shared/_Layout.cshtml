@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] · Aitken Shipping</title>
+    <meta name="description" content="Aitken Shipping — the dispatch console for island-wide delivery across Jamaica. Quote, book, and track every parcel in real time." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="site-header">
+        <div class="container nav">
+            <a class="brand" asp-controller="Home" asp-action="Index">
+                <span class="mark">A</span>
+                <span class="word">Aitken Shipping<small>DISPATCH · JAMAICA</small></span>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+            <nav class="nav-links" id="navlinks">
+                <a asp-controller="Home" asp-action="Index">Home</a>
+                <a asp-controller="Home" asp-action="Services">Services</a>
+                <a asp-controller="Quote" asp-action="Index">Quote</a>
+                <a asp-controller="Track" asp-action="Index">Track</a>
+                <a asp-controller="Home" asp-action="About">About</a>
+                <a class="cta" asp-controller="Book" asp-action="Index">Book a shipment</a>
+            </nav>
+        </div>
+    </header>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div style="max-width:30ch;">
+                    <div class="brand">
+                        <span class="mark">A</span>
+                        <span class="word">Aitken Shipping</span>
+                    </div>
+                    <p style="color:var(--fog);">Island-wide courier and freight, run like an operations desk. Every parcel on the board, every promise kept.</p>
+                </div>
+                <div>
+                    <strong>Company</strong>
+                    <a asp-controller="Home" asp-action="Services">Services</a>
+                    <a asp-controller="Home" asp-action="About">About</a>
+                    <a asp-controller="Home" asp-action="Contact">Contact</a>
+                </div>
+                <div>
+                    <strong>Ship</strong>
+                    <a asp-controller="Quote" asp-action="Index">Get a quote</a>
+                    <a asp-controller="Book" asp-action="Index">Book a shipment</a>
+                    <a asp-controller="Track" asp-action="Index">Track a parcel</a>
+                </div>
+                <div>
+                    <strong>Dispatch</strong>
+                    <a href="tel:+18761234567">876-123-4567</a>
+                    <a href="mailto:dispatch@aitkenshipping.jm">dispatch@aitkenshipping.jm</a>
+                </div>
+            </div>
+            <div class="footer-bottom">© 2026 AITKEN SHIPPING LTD · KINGSTON, JAMAICA · 18.0179°N 76.8099°W</div>
+        </div>
+    </footer>
+
+    <script>
+        // scroll-reveal, respects reduced-motion via CSS
+        (function () {
+            var els = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window) || !els.length) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+            }, { threshold: 0.15 });
+            els.forEach(function (e) { io.observe(e); });
+        })();
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

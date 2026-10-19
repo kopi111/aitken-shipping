@@ -1,0 +1,78 @@
+@model TrackPageViewModel
+@{
+    ViewData["Title"] = "Track a parcel";
+}
+
+<div class="page-head">
+    <div class="container">
+        <span class="waybill green"><span class="led"></span> Live board</span>
+        <h1>Track your shipment</h1>
+        <p>Enter your waybill number to see exactly where your parcel is.</p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container" style="max-width:780px;">
+        <div class="panel">
+            <form asp-controller="Track" asp-action="Index" method="get">
+                <div class="field">
+                    <label for="trackingNumber">Waybill / tracking number</label>
+                    <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
+                        <input type="text" id="trackingNumber" name="trackingNumber" value="@Model.TrackingNumber"
+                               placeholder="AS240001JM" autocomplete="off" style="flex:1; min-width:220px;" />
+                        <button class="btn btn-primary" type="submit">Track</button>
+                    </div>
+                    <span class="help">DEMO · AS240001JM · AS240002JM · AS240003JM</span>
+                </div>
+            </form>
+
+            @if (Model.Searched)
+            {
+                @if (Model.Result is { Found: true, Shipment: not null })
+                {
+                    var s = Model.Result.Shipment;
+                    <div class="manifest">
+                        <div class="track-summary">
+                            <div><div class="k">Waybill</div><div class="v" style="font-family:var(--f-mono);">@s.TrackingNumber</div></div>
+                            <div><div class="k">Status</div><div class="v"><span class="status-badge status-@s.CurrentStatus">@FriendlyStatus(s.CurrentStatus)</span></div></div>
+                            <div><div class="k">Route</div><div class="v">@s.OriginParish → @s.DestinationParish</div></div>
+                            <div><div class="k">Lane</div><div class="v">@s.Service</div></div>
+                            <div><div class="k">Est. delivery</div><div class="v">@s.EstimatedDelivery.ToString("ddd dd MMM")</div></div>
+                        </div>
+
+                        <span class="waybill">Journey log</span>
+                        <ul class="timeline mt-1">
+                            @foreach (var e in s.History.Reverse())
+                            {
+                                <li class="@(e.Status == AitkenShipping.Models.ShipmentStatus.Delivered ? "done" : "")">
+                                    <span class="dot"></span>
+                                    <div class="when">@e.OccurredAt.ToString("ddd dd MMM · HH:mm")</div>
+                                    <div class="what">@FriendlyStatus(e.Status)</div>
+                                    <div class="where">@e.Location — @e.Description</div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    <div class="notice">
+                        <div class="code">ERR · WAYBILL NOT FOUND</div>
+                        <h3>No parcel matches “@Model.TrackingNumber”</h3>
+                        <p>Check the number, or try a demo waybill like <strong>AS240001JM</strong>.</p>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
+
+@functions {
+    static string FriendlyStatus(AitkenShipping.Models.ShipmentStatus status) => status switch
+    {
+        AitkenShipping.Models.ShipmentStatus.PickedUp => "Picked up",
+        AitkenShipping.Models.ShipmentStatus.InTransit => "In transit",
+        AitkenShipping.Models.ShipmentStatus.OutForDelivery => "Out for delivery",
+        _ => status.ToString()
+    };
+}

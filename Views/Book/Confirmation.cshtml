@@ -1,0 +1,45 @@
+@model Shipment
+@{
+    ViewData["Title"] = "Booking confirmed";
+}
+
+<div class="page-head">
+    <div class="container">
+        <span class="waybill green"><span class="led"></span> Waybill issued</span>
+        <h1>Booking confirmed</h1>
+        <p>Your shipment is on the board and ready to move.</p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        <div class="receipt reveal">
+            <div class="receipt-top">
+                <span>AITKEN SHIPPING · WAYBILL</span>
+                <span>@Model.BookedOn.ToString("yyyy-MM-dd")</span>
+            </div>
+            <div class="receipt-body">
+                <span class="waybill" style="justify-content:center;">Save this number</span>
+                <div class="tracking-pill">@Model.TrackingNumber</div>
+
+                <div class="receipt-grid">
+                    <div><div class="k">From</div><div class="v">@Model.OriginParish</div></div>
+                    <div><div class="k">To</div><div class="v">@Model.DestinationParish</div></div>
+                    <div><div class="k">Lane</div><div class="v">@Model.Service</div></div>
+                    <div><div class="k">Weight</div><div class="v">@Model.WeightKg kg</div></div>
+                    <div><div class="k">Est. delivery</div><div class="v">@Model.EstimatedDelivery.ToString("ddd dd MMM")</div></div>
+                </div>
+
+                <div class="total-row">
+                    <span class="lbl">Amount due · JMD</span>
+                    <span class="amount">$@Model.PriceJmd.ToString("N2")</span>
+                </div>
+
+                <div style="display:flex; gap:0.7rem; justify-content:center; flex-wrap:wrap;" class="mt-2">
+                    <a class="btn btn-primary" asp-controller="Track" asp-action="Index" asp-route-trackingNumber="@Model.TrackingNumber">Track this shipment</a>
+                    <a class="btn btn-ghost" asp-controller="Book" asp-action="Index">Book another</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

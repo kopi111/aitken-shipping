@@ -1,0 +1,25 @@
+@{
+    ViewData["Title"] = "Lanes & rates";
+}
+
+<div class="page-head">
+    <div class="container">
+        <span class="waybill">Service catalogue</span>
+        <h1>Lanes & rates</h1>
+        <p>Pick the speed that fits. Every lane is fully tracked, and insurance is one checkbox away.</p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        <div class="card-grid">
+            <div class="card reveal"><div class="tag">LANE · ECO</div><h3>Economy</h3><p>Best value for non-urgent parcels. Delivery in about 5 business days.</p><div class="price">$600 + $120 / kg</div></div>
+            <div class="card reveal"><div class="tag">LANE · STD</div><h3>Standard</h3><p>The everyday choice. About 3 business days island-wide.</p><div class="price">$900 + $150 / kg</div></div>
+            <div class="card reveal"><div class="tag">LANE · EXP</div><h3>Express</h3><p>Next-business-day for time-sensitive shipments.</p><div class="price">$1,600 + $240 / kg</div></div>
+            <div class="card reveal"><div class="tag">LANE · OVN</div><h3>Overnight</h3><p>Booked today, delivered first thing tomorrow. Our fastest lane.</p><div class="price">$2,800 + $380 / kg</div></div>
+            <div class="card reveal"><div class="tag">ADD-ON</div><h3>Insurance</h3><p>Cover the declared value of your goods for 1.5% of the value.</p></div>
+            <div class="card reveal"><div class="tag">ADD-ON</div><h3>Fragile handling</h3><p>Extra care and separate loading for delicate items. 12% surcharge.</p></div>
+        </div>
+        <div class="mt-2"><a class="btn btn-primary" asp-controller="Quote" asp-action="Index">Price my shipment</a></div>
+    </div>
+</section>

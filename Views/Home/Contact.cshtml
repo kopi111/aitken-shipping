@@ -1,0 +1,38 @@
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<div class="page-head">
+    <div class="container">
+        <span class="waybill">Dispatch desk</span>
+        <h1>Contact us</h1>
+        <p>Questions about a shipment, a quote, or a bulk account? We answer the same day.</p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container split">
+        <div class="panel">
+            <span class="waybill">Send a message</span>
+            <h2 class="mt-1">We'll get back today</h2>
+            <form method="post" onsubmit="event.preventDefault(); this.reset(); document.getElementById('sent').style.display='block';">
+                <div class="form-grid">
+                    <div class="field"><label>Your name</label><input type="text" placeholder="Full name" required /></div>
+                    <div class="field"><label>Email</label><input type="email" placeholder="you@example.com" required /></div>
+                    <div class="field full"><label>How can we help?</label><textarea rows="5" placeholder="Tell us what you're shipping…" required></textarea></div>
+                </div>
+                <button class="btn btn-primary mt-1" type="submit">Send message</button>
+                <p id="sent" style="display:none; color:var(--green); font-family:var(--f-mono); font-size:0.85rem;" class="mt-1">✓ MESSAGE QUEUED — dispatch will reply shortly.</p>
+            </form>
+        </div>
+        <div class="aside">
+            <h3>Reach us directly</h3>
+            <ul>
+                <li>Phone · <a href="tel:+18761234567" style="color:var(--gold);">876-123-4567</a></li>
+                <li>Email · <a href="mailto:dispatch@aitkenshipping.jm" style="color:var(--gold);">dispatch@aitkenshipping.jm</a></li>
+                <li>Desk · 12 Trafalgar Road, Kingston 10</li>
+                <li>Hours · Mon–Fri, 8am – 6pm</li>
+            </ul>
+        </div>
+    </div>
+</section>
